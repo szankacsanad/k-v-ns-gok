@@ -1,15 +1,15 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { AppService } from './app.service';
+import { PrismaService } from './prisma.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private prismaService: PrismaService) {}
 
   @Get()
   @Render('index')
-  getHello() {
+  async getHello() {
     return {
-      message: this.appService.getHello()
+      message: await this.prismaService.kivansag.findMany()
     };
   }
 }
